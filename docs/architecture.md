@@ -1,30 +1,51 @@
-# System Architecture
+# ArchiDraw AI — Product Architecture
 
-## Logical layers
+ArchiDraw AI is conceived as a connected environment for technical design, combining conversational interaction, structured CAD operations, project context, visual review, and professional validation.
 
-1. **Interaction:** designer intent, constraints, revisions and review feedback.
-2. **Project context:** versioned drawing state, conventions and technical requirements.
-3. **Orchestration:** coordination of interpretation and drawing operations.
-4. **Validation:** checks for consistency, dimensions and applicable project rules.
-5. **Visualization:** inspectable technical drawing and revision comparison.
-6. **Delivery:** controlled export after human acceptance.
-
-These are conceptual responsibilities, not claims about individual deployed microservices or internal implementation.
-
-## Boundaries
+## Experience architecture
 
 ```mermaid
 flowchart LR
-  Human[Human Operator] --> Input[Design Intent]
-  Input --> Core[Private ArchiDraw AI Implementation]
-  Rules[Project Rules] --> Core
-  Core --> Check[Validation Boundary]
-  Check --> Review[Human Review]
-  Review --> Output[Approved Technical Artifact]
+  U[Design Professional] --> S[Studio & Visual Workspace]
+  U --> N[Natural Language / MCP]
+  R[Drawings, Sketches & References] --> C[Project Context]
+  S --> C
+  N --> C
+  C --> D[CAD Intelligence]
+  D --> V[Geometry & Drawing Validation]
+  V --> P[Plans, Views & Previews]
+  P --> H[Human Review]
+  H --> O[Controlled Revision / Deliverable]
 ```
 
-The private implementation boundary intentionally hides algorithms, infrastructure, internal tools, API contracts and sensitive data.
+This diagram communicates product responsibilities rather than private system topology.
+
+## Core capabilities and design areas
+
+### Intent and context
+Capture the designer's requirements, relevant project references, drawing conventions, and expected changes.
+
+### Geometry-aware drafting
+Operate on structured technical entities—walls, openings, dimensions, and drawing references—rather than manipulating a flat illustration.
+
+### Technical representation
+Connect the underlying drawing to readable plans, axes, annotations, elevations, sections, and print-oriented composition.
+
+### Visual review
+Support inspection of drawings and proposed changes, including reference-based refinement and coordinated views.
+
+### Revision control
+Preserve an auditable relationship between a project state, a proposed modification, and a reviewed result.
+
+### Professional validation
+Assist with consistency checks while retaining responsibility for design approval, regulations, safety, and engineering calculations with qualified professionals.
 
 ## Integration philosophy
 
-External CAD and AI tooling may connect through controlled interfaces. The public repository does not publish private endpoint schemas, credentials, tool identifiers or operational controls.
+The Model Context Protocol (MCP) provides a way to connect AI-assisted interaction with specialized design operations. The product direction also includes a visual Studio experience and user-controlled project storage.
+
+These are architectural goals and development areas, not a claim that every integration or deployment mode is generally available.
+
+## Intellectual property boundary
+
+This repository intentionally omits production source code, private algorithms, internal service contracts, project data, credentials, security controls, and deployment details.
